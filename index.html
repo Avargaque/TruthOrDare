@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, orientation=portrait"/>
+    <title>Prawda czy Wyzwanie</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Teko:wght@300&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container title">
+            <i class="rules-icon fa-regular fa-circle-question"><a href="./rules.html" class="btn-link"></a></i>
+            <div class="headline">
+                <p>Prawda</p>
+                <p>czy</p>
+                <p>Wyzwanie</p>
+            </div>
+            <div class="text">
+                <p>Dodaj graczy (max 8)</p>
+            </div>
+            <div class="players-list">
+                <div class="player-input p1">
+                    <label for="player1">Gracz 1</label>
+                    <input type="text" required placeholder="Gracz 1" />
+                    <button class="btn-add-player" data-target="p2"><i class="fa-solid fa-square-plus add1"></i></button>
+                    <button class="btn-remove-player hidden" data-target="p1"><i class="fa-solid fa-square-minus"></i></button>
+                </div>
+                <div class="player-input p2 hidden">
+                    <label for="player2">Gracz 2</label>
+                    <input type="text" required placeholder="Gracz 2" />
+                    <button class="btn-add-player" data-target="p3"><i class="fa-solid fa-square-plus add2"></i></button>
+                    <button class="btn-remove-player hidden" data-target="p2"><i class="fa-solid fa-square-minus"></i></button>
+                </div>
+                <div class="player-input p3 hidden">
+                    <label for="player3">Gracz 3</label>
+                    <input type="text" required placeholder="Gracz 3" />
+                    <button class="btn-add-player" data-target="p4"><i class="fa-solid fa-square-plus add3"></i></button>
+                    <button class="btn-remove-player hidden" data-target="p3"><i class="fa-solid fa-square-minus"></i></button>
+                </div>
+                <div class="player-input p4 hidden">
+                    <label for="player4">Gracz 4</label>
+                    <input type="text" required placeholder="Gracz 4" />
+                    <button class="btn-add-player" data-target="p5"><i class="fa-solid fa-square-plus add4"></i></button>
+                    <button class="btn-remove-player hidden" data-target="p4"><i class="fa-solid fa-square-minus"></i></button>
+                </div>
+                <div class="player-input p5 hidden">
+                    <label for="player5">Gracz 5</label>
+                    <input type="text" required placeholder="Gracz 5" />
+                    <button class="btn-add-player" data-target="p6"><i class="fa-solid fa-square-plus add5"></i></button>
+                    <button class="btn-remove-player hidden" data-target="p5"><i class="fa-solid fa-square-minus"></i></button>
+                </div>
+                <div class="player-input p6 hidden">
+                    <label for="player6">Gracz 6</label>
+                    <input type="text" required placeholder="Gracz 6" />
+                    <button class="btn-add-player" data-target="p7"><i class="fa-solid fa-square-plus add6"></i></button>
+                    <button class="btn-remove-player hidden" data-target="p6"><i class="fa-solid fa-square-minus"></i></button>
+                </div>
+                <div class="player-input p7 hidden">
+                    <label for="player7">Gracz 7</label>
+                    <input type="text" required placeholder="Gracz 7" />
+                    <button class="btn-add-player" data-target="p8"><i class="fa-solid fa-square-plus add7"></i></button>
+                    <button class="btn-remove-player hidden" data-target="p7"><i class="fa-solid fa-square-minus"></i></button>
+                </div>
+                <div class="player-input p8 hidden">
+                    <label for="player8">Gracz 8</label>
+                    <input type="text" required placeholder="Gracz 8" />
+					<button class="btn-remove-player" data-target="p8"><i class="fa-solid fa-square-minus"></i></button>
+                </div>
+            </div>
+            <a href="./menu.html"><button class="btn-start">START</button></a>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/0b9b37f370.js" crossorigin="anonymous"></script>
+    <script src="./js/script.js"></script>
+</body>
+</html>

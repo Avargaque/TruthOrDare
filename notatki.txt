@@ -19,3 +19,7 @@ dodanie gracza dodaje go do bazy danych graczy - przy kliknieciu start!
 przy dodawaniu graczy ikona usuwajaca graczy - latwiej zrobic reset na calosc niz usuwanie pojedynczych
 
 sprawdzic czy bez wpisania gracza w input dodaje sie wartosc domyslna jako nazwa gracza
+
+gdy nazwa gracza pusta - aktualnie jest pusta nazwa w grze - zmienic
+
+przycisk przekazania pytania odejmuje tylko punkty

@@ -112,7 +112,7 @@ button:active {
   background-color: rgba(13, 100, 49, 0.55);
 }
 
-.btn-next {
+.btn-next-player {
   margin: 4px;
   width: 170px;
   height: 62px;
@@ -233,7 +233,7 @@ a {
   padding: 8px;
   left: 10px;
   top: 25px;
-  font-size: 40px;
+  font-size: 35px;
   color: lavenderblush;
 }
 

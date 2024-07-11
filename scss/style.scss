@@ -100,7 +100,7 @@ button:active {
 	border-radius: 0;
 	background-color: $chance-color;
 }
-.btn-next {
+.btn-next-player {
 	margin: 4px;
 	width: 170px;
 	height: 62px;
@@ -215,13 +215,13 @@ a {
 	}
 }
 
-// ikona powrotu
+// ikona powrotu/home
 .back-icon {
 	position: absolute;
 	padding: 8px;
 	left: 10px;
 	top: 25px;
-	font-size: 40px;
+	font-size: 35px;
 	color: $text-color;
 }
 

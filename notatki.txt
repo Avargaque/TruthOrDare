@@ -1,7 +1,3 @@
-maksymalna liczba znakow gracza = 14
-
-max liczba graczy 8
-
 szansa - albo losowa duza ilosc punktow z przedzialu (25% szans) albo losowa kategoria - 5, 10, 20 lub 40 punktow
 
 mozliwosc wylosowania innego pytania lub PRZEKAZUJE INNEMU GRACZOWI TJ. SAM WYZNACZA KTO MA TO ZROBIC/ODPOWIEDZIEC
@@ -13,12 +9,6 @@ przewijanie zasad zasłaniane przez przyciski - malo wazne
 przycisk nastepny gracz dodaje punkty i zmienia gracza
 
 reroll mozna tylko jak ma sie wysdtarczajaco punktow
-
-dodanie gracza dodaje go do bazy danych graczy - przy kliknieciu start!
-
-przy dodawaniu graczy ikona usuwajaca graczy - latwiej zrobic reset na calosc niz usuwanie pojedynczych
-
-sprawdzic czy bez wpisania gracza w input dodaje sie wartosc domyslna jako nazwa gracza
 
 gdy nazwa gracza pusta - aktualnie jest pusta nazwa w grze - zmienic
 

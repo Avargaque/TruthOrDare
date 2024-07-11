@@ -6,6 +6,8 @@ const nextPlayerButton = document.querySelector(".btn-next");
 const additionalNextButton = document.querySelector(".btn-success");
 if (nextPlayerButton) {
 	nextPlayerButton.addEventListener("click", nextPlayer);
+}
+if (additionalNextButton){
     additionalNextButton.addEventListener("click", nextPlayer);
 }
 
@@ -45,7 +47,7 @@ function updatePlayerInputs() {
 	});
 }
 
-// funkcja zapisująca nazwy graczy do local storage
+// funkcja zapisująca nazwy graczy do session storage
 function savePlayers() {
 	const playerInputs = document.querySelectorAll(
 		".players-list .player-input input"
@@ -53,15 +55,18 @@ function savePlayers() {
 	const players = [];
 
 	playerInputs.forEach((input) => {
-		players.push(input.value);
+        const playerName = input.value.trim();
+        if (playerName) {
+            players.push(playerName);
+        }
 	});
 
-	localStorage.setItem("players", JSON.stringify(players));
+	sessionStorage.setItem("players", JSON.stringify(players));
 }
 
-// funkcja do pobierania listy graczy z local storage
+// funkcja do pobierania listy graczy z session storage
 function getPlayers() {
-	return JSON.parse(localStorage.getItem("players")) || [];
+	return JSON.parse(sessionStorage.getItem("players")) || [];
 }
 
 // funkcja do aktualizacji nazwy gracza na podstawie indeksu
@@ -77,7 +82,7 @@ function updatePlayerName(playerIndex) {
 // funkcja do obsługi przycisku następnego gracza
 function nextPlayer() {
 	let currentPlayerIndex =
-		parseInt(localStorage.getItem("currentPlayerIndex")) || 0;
+		parseInt(sessionStorage.getItem("currentPlayerIndex")) || 0;
 	const players = getPlayers();
 
 	// jeśli nie ma żadnych graczy, zakończ funkcję
@@ -85,7 +90,7 @@ function nextPlayer() {
 
 	// inkrementacja indeksu gracza
 	currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-	localStorage.setItem("currentPlayerIndex", currentPlayerIndex.toString());
+	sessionStorage.setItem("currentPlayerIndex", currentPlayerIndex.toString());
 
 	// aktualizacja nazwy gracza na stronie
 	updatePlayerName(currentPlayerIndex);
@@ -102,10 +107,16 @@ function goToMenuPage() {
 // funkcja rozpoczynająca grę
 function startGame() {
 	savePlayers();
-	updatePlayerName(0);
+	sessionStorage.setItem('currentPlayerIndex', '0');
 	goToMenuPage();
 }
 
+
+// operacje wykonywane przy załadowaniu strony
 document.addEventListener("DOMContentLoaded", function () {
 	initializeSlider();
+
+    // aktualizacja nazwy gracza na podstawie indeksu
+    const currentPlayerIndex = parseInt(sessionStorage.getItem('currentPlayerIndex')) || 0;
+    updatePlayerName(currentPlayerIndex);
 });

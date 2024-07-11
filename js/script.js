@@ -1,37 +1,32 @@
-// formularz dodawania graczy
-document.addEventListener('DOMContentLoaded', function() {
-    const addButtons = document.querySelectorAll('.btn-add-player');
-    const removeButtons = document.querySelectorAll('.btn-remove-player');
-    
-    addButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const targetClass = button.getAttribute('data-target');
-            const targetElement = document.querySelector(`.${targetClass}`);
-            const currentRemoveButton = button.nextElementSibling;
-            
-            if (targetElement) {
-                targetElement.classList.remove('hidden');
-            }
-            if (currentRemoveButton) {
-                currentRemoveButton.classList.remove('hidden');
-            }
-            button.classList.add('hidden');
-        });
-    });
+// zmienne globalne
+const slider = document.getElementById('playerRange');
+const playerCount = document.getElementById('playerCount');
 
-    removeButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const targetClass = button.getAttribute('data-target');
-            const targetElement = document.querySelector(`.${targetClass}`);
-            const currentAddButton = button.previousElementSibling;
-            
-            if (targetElement) {
-                targetElement.classList.add('hidden');
-            }
-            if (currentAddButton) {
-                currentAddButton.classList.remove('hidden');
-            }
-            button.classList.add('hidden');
-        });
+// funkcja do wyboru liczby graczy na podstawie suwaka
+function updatePlayerInputs() {
+    const playerRange = document.getElementById('playerRange');
+    const playerCountDisplay = document.getElementById('playerCount');
+    const playerInputs = document.querySelectorAll('.players-list .player-input');
+    // aktualizacja liczby graczy
+    const count = parseInt(playerRange.value);
+    playerCountDisplay.textContent = count;
+    // widoczność pól graczy
+    playerInputs.forEach((input, index) => {
+        if (index < count) {
+            input.classList.remove('hidden');
+        } else {
+            input.classList.add('hidden');
+        }
     });
+}
+
+// funkcja inicjująca obsługę suwaka
+function initializeSlider() {
+    slider.addEventListener('input', updatePlayerInputs);
+}
+
+// pywołanie funkcji po załadowaniu DOM
+document.addEventListener('DOMContentLoaded', function() {
+    initializeSlider();
+    updatePlayerInputs();
 });

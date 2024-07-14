@@ -258,9 +258,6 @@ a {
   margin-top: 24px;
 }
 
-.rules {
-  overflow-y: scroll;
-}
 .rules .line {
   width: 80%;
   height: 2px;
@@ -462,6 +459,17 @@ a {
 @keyframes flip {
   0%, 80% {
     transform: rotateY(360deg);
+  }
+}
+.scale-up-center {
+  animation: scale-up-center 0.4s ease-out both;
+}
+@keyframes scale-up-center {
+  0% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 @media (max-height: 660px) {

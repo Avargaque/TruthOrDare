@@ -250,8 +250,6 @@ a {
 
 // zasady
 .rules {
-	overflow-y: scroll;
-
 	// linia oddzielająca akapity
 	.line {
 		width: 80%;
@@ -416,28 +414,28 @@ a {
 
 // komunikat braku wystarczającej liczby punktów
 .pop-up {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color:$time-color;
-    padding: 10px 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 9999;
-    animation: popup 3s ease;
+	display: none;
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: $time-color;
+	padding: 10px 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	z-index: 9999;
+	animation: popup 3s ease;
 }
 @keyframes popup {
-    0% {
-        opacity: 1;
-    }
-	50%{
+	0% {
 		opacity: 1;
 	}
-    100% {
-        opacity: 0;
-    }
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
 }
 // animacja obrotu nazwy gracza
 .waviy {
@@ -451,6 +449,33 @@ a {
 		transform: rotateY(360deg);
 	}
 }
+
+// animacja wejścia
+.scale-up-center {
+	-webkit-animation: scale-up-center 0.4s ease-out both;
+	        animation: scale-up-center 0.4s ease-out both;
+}
+ @-webkit-keyframes scale-up-center {
+	0% {
+	  -webkit-transform: scale(0.95);
+			  transform: scale(0.95);
+	}
+	100% {
+	  -webkit-transform: scale(1);
+			  transform: scale(1);
+	}
+  }
+  @keyframes scale-up-center {
+	0% {
+	  -webkit-transform: scale(0.95);
+			  transform: scale(0.95);
+	}
+	100% {
+	  -webkit-transform: scale(1);
+			  transform: scale(1);
+	}
+  }
+  
 
 // media queries
 @media (max-height: 660px) {
@@ -523,7 +548,7 @@ a {
 	.row a span.emoji {
 		font-size: 30px;
 	}
-	.pop-up{
+	.pop-up {
 		padding: 20px 30px;
 		font-size: 30px;
 	}

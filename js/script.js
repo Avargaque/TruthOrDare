@@ -154,8 +154,20 @@ function savePlayers() {
 		}
 	});
 
-	sessionStorage.setItem("players", JSON.stringify(players));
-	sessionStorage.setItem("currentPlayerIndex", "0");
+	// sprawdzenie czy wszyscy gracze mają nazwy
+	if (players.length === playerInputs.length) {
+		sessionStorage.setItem("players", JSON.stringify(players));
+		sessionStorage.setItem("currentPlayerIndex", "0");
+	} else {
+		// komunikat o braku punktów i blokada startu
+		const popupMessage = document.querySelector(".pop-up");
+		popupMessage.style.display = "block";
+		setTimeout(() => {
+			popupMessage.style.display = "none";
+		}, 2000);
+		const startButton = document.querySelector(".btn-start");
+        startButton.disabled = true;
+	}
 }
 
 // funkcja do pobierania listy graczy z session storage
@@ -322,6 +334,12 @@ function updatePlayerScores() {
 // operacje wykonywane przy załadowaniu strony
 document.addEventListener("DOMContentLoaded", function () {
 	initializeSlider();
+
+	// dodawanie animacji po załadowaniu strony
+	const elementsToAnimate = document.querySelectorAll(".animate-on-load");
+	elementsToAnimate.forEach((element) => {
+		element.classList.add("scale-up-center");
+	});
 
 	// aktualizacja nazwy gracza na podstawie indeksu
 	const currentPlayerIndex =

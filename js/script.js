@@ -154,20 +154,8 @@ function savePlayers() {
 		}
 	});
 
-	// sprawdzenie czy wszyscy gracze mają nazwy
-	if (players.length === playerInputs.length) {
-		sessionStorage.setItem("players", JSON.stringify(players));
-		sessionStorage.setItem("currentPlayerIndex", "0");
-	} else {
-		// komunikat o braku punktów i blokada startu
-		const popupMessage = document.querySelector(".pop-up");
-		popupMessage.style.display = "block";
-		setTimeout(() => {
-			popupMessage.style.display = "none";
-		}, 2000);
-		const startButton = document.querySelector(".btn-start");
-        startButton.disabled = true;
-	}
+	sessionStorage.setItem("players", JSON.stringify(players));
+	sessionStorage.setItem("currentPlayerIndex", "0");
 }
 
 // funkcja do pobierania listy graczy z session storage

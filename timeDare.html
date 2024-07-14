@@ -18,11 +18,8 @@
 	<body>
 		<div class="wrapper">
 			<div class="container">
-				<i class="back-icon fa-solid fa-left-long"
-					><a href="./menu.html" class="btn-link"></a
-				></i>
 				<div class="score">
-					<p class="text">0</p>
+					<p class="player-score text"></p>
 					<i class="fa-solid fa-star"></i>
 				</div>
 				<div class="waviy">
@@ -39,7 +36,7 @@
 				</div>
 					<div class="row">
 						<button class="btn-fail btn-next">Koniec czasu!</button>
-						<button class="btn-success btn-next">Udało się <span class="emoji">😍</span></button>
+						<button class="btn-success btn-next btn-fifteen-points">Udało się <span class="emoji">😍</span></button>
 					</div>
 					<div class="skip-container">
 						<div class="skip-row">
@@ -59,12 +56,15 @@
 				</div>
 			</div>
 		</div>
-
+		<div class="pop-up">
+			<p>Za mało punktów!</p>
+		</div>
 		<script
 			src="https://kit.fontawesome.com/0b9b37f370.js"
 			crossorigin="anonymous"
 		></script>
 		<script src="./js/timer.js"></script>
 		<script src="./js/script.js"></script>
+		<script src="./js/score.js"></script>
 	</body>
 </html>

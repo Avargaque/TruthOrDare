@@ -1,7 +1,39 @@
 // slider
 const slider = document.getElementById("playerRange");
 
-// przycisk następnego gracza
+// przyciski dodające punkty
+const btnFivePoints = document.querySelector(".btn-five-points");
+const btnTenPoints = document.querySelector(".btn-ten-points");
+const btnFifteenPoints = document.querySelector(".btn-fifteen-points");
+
+if (btnFivePoints) {
+	btnFivePoints.addEventListener("click", () => {
+		const currentPlayer = getCurrentPlayer();
+		if (currentPlayer) {
+			addPoints(currentPlayer, 5);
+		}
+	});
+}
+
+if (btnTenPoints) {
+	btnTenPoints.addEventListener("click", () => {
+		const currentPlayer = getCurrentPlayer();
+		if (currentPlayer) {
+			addPoints(currentPlayer, 10);
+		}
+	});
+}
+
+if (btnFifteenPoints) {
+	btnFifteenPoints.addEventListener("click", () => {
+		const currentPlayer = getCurrentPlayer();
+		if (currentPlayer) {
+			addPoints(currentPlayer, 15);
+		}
+	});
+}
+
+// przyciski następnego gracza
 const nextPlayerButton = document.querySelector(".btn-next");
 const additionalNextButton = document.querySelector(".btn-success");
 if (nextPlayerButton) {
@@ -9,6 +41,64 @@ if (nextPlayerButton) {
 }
 if (additionalNextButton) {
 	additionalNextButton.addEventListener("click", nextPlayer);
+}
+
+// przycisk zmiany pytania/wyzwania
+const rerollButton = document.querySelector(".btn-reroll");
+if (rerollButton) {
+	rerollButton.addEventListener("click", (event) => {
+		event.preventDefault();
+		const currentPlayer = getCurrentPlayer();
+		if (currentPlayer) {
+			if (getPoints(currentPlayer) >= 15) {
+				addPoints(currentPlayer, -15);
+				location.reload();
+			} else {
+				// komunikat o braku punktów
+				const popupMessage = document.querySelector(".pop-up");
+				popupMessage.style.display = "block";
+				setTimeout(() => {
+					popupMessage.style.display = "none";
+				}, 2000);
+			}
+		}
+	});
+}
+
+// przycisk przekazania pytania/wyzwania
+const skipButton = document.querySelector(".btn-skip");
+if (skipButton) {
+	skipButton.addEventListener("click", (event) => {
+		event.preventDefault();
+		const currentPlayer = getCurrentPlayer();
+		if (currentPlayer) {
+			if (getPoints(currentPlayer) >= 30) {
+				addPoints(currentPlayer, -30);
+				// Wyświetlenie pytania dla nowego gracza
+				let currentPlayerIndex =
+					parseInt(sessionStorage.getItem("currentPlayerIndex")) || 0;
+				const players = getPlayers();
+				// jeśli nie ma żadnych graczy, zakończ funkcję
+				if (players.length === 0) return;
+				// inkrementacja indeksu gracza
+				currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+				sessionStorage.setItem(
+					"currentPlayerIndex",
+					currentPlayerIndex.toString()
+				);
+				// aktualizacja nazwy gracza na stronie
+				updatePlayerName(currentPlayerIndex);
+				updatePlayerScores();
+			} else {
+				// komunikat o braku punktów
+				const popupMessage = document.querySelector(".pop-up");
+				popupMessage.style.display = "block";
+				setTimeout(() => {
+					popupMessage.style.display = "none";
+				}, 2000);
+			}
+		}
+	});
 }
 
 // przycisk szansy
@@ -59,15 +149,26 @@ function savePlayers() {
 		const playerName = input.value.trim();
 		if (playerName) {
 			players.push(playerName);
+			// inicjalizacja punktów dla każdego gracza
+			sessionStorage.setItem(`${playerName}_points`, "0");
 		}
 	});
 
 	sessionStorage.setItem("players", JSON.stringify(players));
+	sessionStorage.setItem("currentPlayerIndex", "0");
 }
 
 // funkcja do pobierania listy graczy z session storage
 function getPlayers() {
 	return JSON.parse(sessionStorage.getItem("players")) || [];
+}
+
+// funkcja zwracająca aktualnego gracza
+function getCurrentPlayer() {
+	const players = getPlayers();
+	const currentPlayerIndex =
+		parseInt(sessionStorage.getItem("currentPlayerIndex")) || 0;
+	return players[currentPlayerIndex];
 }
 
 // funkcja do aktualizacji nazwy gracza na podstawie indeksu
@@ -191,6 +292,33 @@ function randomChoice() {
 	return choices[randomIndex]();
 }
 
+// funkcja zmieniająca liczbę punktów gracza
+function addPoints(player, points) {
+	const currentPoints =
+		parseInt(sessionStorage.getItem(`${player}_points`)) || 0;
+	const newPoints = currentPoints + points;
+	sessionStorage.setItem(`${player}_points`, newPoints.toString());
+	updatePlayerScores();
+}
+// funkcja odczytująca punkty gracza
+function getPoints(player) {
+	const points = parseInt(sessionStorage.getItem(`${player}_points`)) || 0;
+	return points;
+}
+
+// funkcja aktualizująca wyniki graczy
+function updatePlayerScores() {
+	const players = getPlayers();
+	const currentPlayerIndex =
+		parseInt(sessionStorage.getItem("currentPlayerIndex")) || 0;
+	const currentPlayer = players[currentPlayerIndex];
+	const playerScoreElement = document.querySelector(".player-score");
+	if (playerScoreElement) {
+		const points = getPoints(currentPlayer);
+		playerScoreElement.textContent = `${points}`;
+	}
+}
+
 // operacje wykonywane przy załadowaniu strony
 document.addEventListener("DOMContentLoaded", function () {
 	initializeSlider();
@@ -201,32 +329,38 @@ document.addEventListener("DOMContentLoaded", function () {
 	updatePlayerName(currentPlayerIndex);
 
 	// wyświetlenie pytań i wyzwań
-	if (window.location.pathname === "/truth.html"){
+	if (window.location.pathname === "/truth.html") {
 		fetchRandomQuestion();
 	}
-	if (window.location.pathname === "/dare.html"){
+	if (window.location.pathname === "/dare.html") {
 		fetchRandomDare();
 	}
-	if (window.location.pathname === "/timeDare.html"){
+	if (window.location.pathname === "/timeDare.html") {
 		fetchRandomTimeDare();
 	}
 
 	// aktywacja przycisku szansy
-	if (window.location.pathname === "/menu.html"){
+	if (window.location.pathname === "/menu.html") {
 		chanceButton.addEventListener("click", randomChoice);
 	}
-	
-	// przypisanie punktów na stronie szansy
-	if (window.location.pathname === "/chance.html"){
-			// funkcja przydzielająca losowo punkty
-			const randomPoints = function () {
-				const bonusPoints = [5, 10, 20, 50];
-				const randomIndex = Math.floor(Math.random() * bonusPoints.length);
-				return bonusPoints[randomIndex];
-			};
-			const points = randomPoints();
 
-        const pointsContainer = document.getElementById('random-points-container');
-        pointsContainer.textContent = points;
+	// przypisanie punktów na stronie szansy
+	if (window.location.pathname === "/chance.html") {
+		// funkcja przydzielająca losowo punkty
+		const randomPoints = function () {
+			const bonusPoints = [0, 10, 20, 50];
+			const randomIndex = Math.floor(Math.random() * bonusPoints.length);
+			return bonusPoints[randomIndex];
+		};
+		const points = randomPoints();
+
+		const pointsContainer = document.getElementById("random-points-container");
+		pointsContainer.textContent = points;
+
+		// dodanie punktów do konta gracza
+		addPoints(getCurrentPlayer(), points);
 	}
+
+	//aktualizacja wyników graczy
+	updatePlayerScores();
 });

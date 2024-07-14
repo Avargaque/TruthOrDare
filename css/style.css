@@ -428,6 +428,31 @@ a {
   cursor: pointer;
 }
 
+.pop-up {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(134, 90, 24, 0.8);
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  animation: popup 3s ease;
+}
+
+@keyframes popup {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 .waviy {
   display: inline-block;
   animation: flip 4s infinite;
@@ -505,6 +530,10 @@ a {
     height: 70px;
   }
   .row a span.emoji {
+    font-size: 30px;
+  }
+  .pop-up {
+    padding: 20px 30px;
     font-size: 30px;
   }
 }/*# sourceMappingURL=style.css.map */

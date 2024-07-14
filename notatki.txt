@@ -1,5 +1,3 @@
-szansa - albo losowa duza ilosc punktow z przedzialu (25% szans) albo losowa kategoria - 5, 10, 20 lub 40 punktow
-
 mozliwosc wylosowania innego pytania lub PRZEKAZUJE INNEMU GRACZOWI TJ. SAM WYZNACZA KTO MA TO ZROBIC/ODPOWIEDZIEC
 
 przewijanie zasad zasłaniane przez przyciski - malo wazne
@@ -8,8 +6,6 @@ przycisk nastepny gracz dodaje punkty i zmienia gracza
 
 reroll mozna tylko jak ma sie wysdtarczajaco punktow
 
-gdy nazwa gracza pusta - aktualnie jest pusta nazwa w grze - zmienic
-
 przycisk przekazania pytania odejmuje tylko punkty
 
-nie moze byc puista nbazwa uzytkownika
+nie moze byc pusta nazwa uzytkownika

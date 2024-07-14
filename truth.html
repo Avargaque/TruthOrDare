@@ -18,11 +18,8 @@
 	<body>
 		<div class="wrapper">
 			<div class="container">
-				<i class="back-icon fa-solid fa-left-long"
-					><a href="./menu.html" class="btn-link"></a
-				></i>
 				<div class="score">
-					<p class="text">0</p>
+					<p class="player-score text"></p>
 					<i class="fa-solid fa-star"></i>
 				</div>
 				<div class="waviy">
@@ -33,7 +30,7 @@
 				<div id="question-container" class="text">
 
 				</div>
-				<button type="button" class="btn-next btn-next-player">Następny gracz</button>
+				<button type="button" class="btn-next btn-next-player  btn-five-points">Następny gracz</button>
 					<div class="skip-container">
 						<div class="skip-row">
 						<p class="text">- 15 <i class="fa-solid fa-star"></i></p>
@@ -52,12 +49,14 @@
 					</div>
 			</div>
 		</div>
-
+		<div class="pop-up">
+			<p>Za mało punktów!</p>
+		</div>
 		<script
 			src="https://kit.fontawesome.com/0b9b37f370.js"
 			crossorigin="anonymous"
 		></script>
 		<script src="./js/script.js"></script>
-		<script src="./server/server.js"></script>
+		<script src="./js/score.js"></script>
 	</body>
 </html>

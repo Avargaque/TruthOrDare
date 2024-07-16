@@ -193,6 +193,9 @@ a {
   justify-content: space-around;
   width: 100%;
 }
+.content .text {
+  width: 80px;
+}
 .content .fa-star {
   padding: 3px;
   font-size: 16px;
@@ -543,5 +546,8 @@ a {
   .pop-up {
     padding: 20px 30px;
     font-size: 30px;
+  }
+  .content .text {
+    width: 120px;
   }
 }/*# sourceMappingURL=style.css.map */

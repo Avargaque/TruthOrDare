@@ -20,14 +20,14 @@ body {
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
-	height: 100vh;
-	width: 100vw;
+	height: 100svh;
+	width: 100svw;
 }
 .container {
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-evenly;
+	justify-content: space-around;
 	align-items: center;
 	height: 100%;
 }
@@ -169,7 +169,14 @@ a {
 	text-align: center;
 	font-size: 32px;
 }
-
+// kontener na pytanie
+.question-box{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100vw;
+	height: 180px;
+}
 // menu wyboru
 .content {
 	display: flex;

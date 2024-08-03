@@ -217,7 +217,7 @@ function startGame() {
 async function fetchRandomQuestion() {
 	try {
 		// wczytanie zawartości pliku JSON
-		const response = await fetch("./data/questions.json");
+		const response = await fetch("https://avargaque.github.io/TruthOrDare/data/questions.json");
 		JSON;
 		const data = await response.json();
 

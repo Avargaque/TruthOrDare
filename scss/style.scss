@@ -48,12 +48,11 @@ button {
 	transition: all 0.3s ease;
 }
 button:hover {
-	background-color: rgba(87, 1, 1, 0.5);
+	opacity: 0.7;
 	transform: scale(0.9);
 }
 button:active {
-	background-color: rgba(87, 1, 1, 0.5);
-	transform: scale(0.9);
+	opacity: 0.7;
 }
 .btn-content {
 	position: absolute;
@@ -170,7 +169,7 @@ a {
 	font-size: 32px;
 }
 // kontener na pytanie
-.question-box{
+.question-box {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -185,7 +184,7 @@ a {
 	align-items: center;
 	justify-content: space-around;
 	width: 100%;
-	.text{
+	.text {
 		width: 80px;
 	}
 	.fa-star {
@@ -461,31 +460,25 @@ a {
 }
 
 // animacja wejścia
-.scale-up-center {
-	-webkit-animation: scale-up-center 0.4s ease-out both;
-	        animation: scale-up-center 0.4s ease-out both;
+// początkowy stan
+.animate-on-load > * {
+	transform: scaleX(0.75);
+	opacity: 0; /* Ukrycie elementów do momentu rozpoczęcia animacji (opcjonalnie) */
 }
- @-webkit-keyframes scale-up-center {
+// klasa uruchamiająca animację
+.scale-up-center {
+	animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+@keyframes scale-up-center {
 	0% {
-	  -webkit-transform: scale(0.95);
-			  transform: scale(0.95);
+		transform: scaleX(0.75);
+		opacity: 0;
 	}
 	100% {
-	  -webkit-transform: scale(1);
-			  transform: scale(1);
+		transform: scaleX(1);
+		opacity: 1;
 	}
-  }
-  @keyframes scale-up-center {
-	0% {
-	  -webkit-transform: scale(0.95);
-			  transform: scale(0.95);
-	}
-	100% {
-	  -webkit-transform: scale(1);
-			  transform: scale(1);
-	}
-  }
-  
+}
 
 // media queries
 @media (max-height: 660px) {
@@ -562,8 +555,8 @@ a {
 		padding: 20px 30px;
 		font-size: 30px;
 	}
-	.content{
-		.text{
+	.content {
+		.text {
 			width: 120px;
 		}
 	}

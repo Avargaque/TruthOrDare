@@ -1,115 +1,23 @@
+// ZMIENNE
 // slider
 const slider = document.getElementById("playerRange");
-
 // przyciski dodające punkty
 const btnFivePoints = document.querySelector(".btn-five-points");
 const btnTenPoints = document.querySelector(".btn-ten-points");
 const btnFifteenPoints = document.querySelector(".btn-fifteen-points");
-
-if (btnFivePoints) {
-	btnFivePoints.addEventListener("click", () => {
-		const currentPlayer = getCurrentPlayer();
-		if (currentPlayer) {
-			addPoints(currentPlayer, 5);
-		}
-	});
-}
-
-if (btnTenPoints) {
-	btnTenPoints.addEventListener("click", () => {
-		const currentPlayer = getCurrentPlayer();
-		if (currentPlayer) {
-			addPoints(currentPlayer, 10);
-		}
-	});
-}
-
-if (btnFifteenPoints) {
-	btnFifteenPoints.addEventListener("click", () => {
-		const currentPlayer = getCurrentPlayer();
-		if (currentPlayer) {
-			addPoints(currentPlayer, 15);
-		}
-	});
-}
-
 // przyciski następnego gracza
 const nextPlayerButton = document.querySelector(".btn-next");
 const additionalNextButton = document.querySelector(".btn-success");
-if (nextPlayerButton) {
-	nextPlayerButton.addEventListener("click", nextPlayer);
-}
-if (additionalNextButton) {
-	additionalNextButton.addEventListener("click", nextPlayer);
-}
-
 // przycisk zmiany pytania/wyzwania
 const rerollButton = document.querySelector(".btn-reroll");
-if (rerollButton) {
-	rerollButton.addEventListener("click", (event) => {
-		event.preventDefault();
-		const currentPlayer = getCurrentPlayer();
-		if (currentPlayer) {
-			if (getPoints(currentPlayer) >= 15) {
-				addPoints(currentPlayer, -15);
-				location.reload();
-			} else {
-				// komunikat o braku punktów
-				const popupMessage = document.querySelector(".pop-up");
-				popupMessage.style.display = "block";
-				setTimeout(() => {
-					popupMessage.style.display = "none";
-				}, 2000);
-			}
-		}
-	});
-}
-
 // przycisk przekazania pytania/wyzwania
 const skipButton = document.querySelector(".btn-skip");
-if (skipButton) {
-	skipButton.addEventListener("click", (event) => {
-		event.preventDefault();
-		const currentPlayer = getCurrentPlayer();
-		if (currentPlayer) {
-			if (getPoints(currentPlayer) >= 30) {
-				addPoints(currentPlayer, -30);
-				// Wyświetlenie pytania dla nowego gracza
-				let currentPlayerIndex =
-					parseInt(sessionStorage.getItem("currentPlayerIndex")) || 0;
-				const players = getPlayers();
-				// jeśli nie ma żadnych graczy, zakończ funkcję
-				if (players.length === 0) return;
-				// inkrementacja indeksu gracza
-				currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-				sessionStorage.setItem(
-					"currentPlayerIndex",
-					currentPlayerIndex.toString()
-				);
-				// aktualizacja nazwy gracza na stronie
-				updatePlayerName(currentPlayerIndex);
-				updatePlayerScores();
-			} else {
-				// komunikat o braku punktów
-				const popupMessage = document.querySelector(".pop-up");
-				popupMessage.style.display = "block";
-				setTimeout(() => {
-					popupMessage.style.display = "none";
-				}, 2000);
-			}
-		}
-	});
-}
-
 // przycisk szansy
 const chanceButton = document.getElementById("btn-chance");
-
 // przycisk rozpoczęcia gry
 const startButton = document.querySelector(".btn-start");
-if (startButton) {
-	startButton.addEventListener("click", startGame);
-}
 
+// FUNKCJE
 // funkcja inicjująca obsługę suwaka
 function initializeSlider() {
 	if (slider) {
@@ -194,9 +102,6 @@ function nextPlayer() {
 	currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
 	sessionStorage.setItem("currentPlayerIndex", currentPlayerIndex.toString());
 
-	// aktualizacja nazwy gracza na stronie
-	updatePlayerName(currentPlayerIndex);
-
 	// przejście do kolejnego gracza
 	goToMenuPage();
 }
@@ -217,7 +122,7 @@ function startGame() {
 async function fetchRandomQuestion() {
 	try {
 		// wczytanie zawartości pliku JSON
-		const response = await fetch("https://avargaque.github.io/TruthOrDare/data/questions.json");
+		const response = await fetch("./data/questions.json");
 		JSON;
 		const data = await response.json();
 
@@ -319,20 +224,132 @@ function updatePlayerScores() {
 	}
 }
 
+// funkcja dodająca animacje
+function animate() {
+	const parentAnimationElement = document.querySelector(".animate-on-load");
+	const childAnimationElements = parentAnimationElement.children;
+	Array.from(childAnimationElements).forEach((element, index) => {
+		element.classList.remove("scale-up-center");
+		void element.offsetWidth;
+		const delay = index * 200; // opóźnienie dla każdego kolejnego elementu
+		setTimeout(() => {
+			element.classList.add("scale-up-center");
+		}, delay);
+	});
+}
+
+// LISTENERY
+// przyciski dodające punkty
+if (btnFivePoints) {
+	btnFivePoints.addEventListener("click", () => {
+		const currentPlayer = getCurrentPlayer();
+		if (currentPlayer) {
+			addPoints(currentPlayer, 5);
+		}
+	});
+}
+if (btnTenPoints) {
+	btnTenPoints.addEventListener("click", () => {
+		const currentPlayer = getCurrentPlayer();
+		if (currentPlayer) {
+			addPoints(currentPlayer, 10);
+		}
+	});
+}
+if (btnFifteenPoints) {
+	btnFifteenPoints.addEventListener("click", () => {
+		const currentPlayer = getCurrentPlayer();
+		if (currentPlayer) {
+			addPoints(currentPlayer, 15);
+		}
+	});
+}
+
+// przyciski następnego gracza
+if (nextPlayerButton) {
+	nextPlayerButton.addEventListener("click", nextPlayer);
+}
+if (additionalNextButton) {
+	additionalNextButton.addEventListener("click", nextPlayer);
+}
+
+// przyciski zmiany pytania
+if (rerollButton) {
+	rerollButton.addEventListener("click", (event) => {
+		event.preventDefault();
+		const currentPlayer = getCurrentPlayer();
+		if (currentPlayer) {
+			if (getPoints(currentPlayer) >= 15) {
+				addPoints(currentPlayer, -15);
+				location.reload();
+			} else {
+				// komunikat o braku punktów
+				const popupMessage = document.querySelector(".pop-up");
+				popupMessage.style.display = "block";
+				setTimeout(() => {
+					popupMessage.style.display = "none";
+				}, 2000);
+			}
+		}
+	});
+}
+
+// przyciski przekazania pytania/wyzwania
+if (skipButton) {
+	skipButton.addEventListener("click", (event) => {
+		event.preventDefault();
+		const currentPlayer = getCurrentPlayer();
+		if (currentPlayer) {
+			if (getPoints(currentPlayer) >= 30) {
+				addPoints(currentPlayer, -30);
+				// Wyświetlenie pytania dla nowego gracza
+				let currentPlayerIndex =
+					parseInt(sessionStorage.getItem("currentPlayerIndex")) || 0;
+				const players = getPlayers();
+				// jeśli nie ma żadnych graczy, zakończ funkcję
+				if (players.length === 0) return;
+				// inkrementacja indeksu gracza
+				currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+				sessionStorage.setItem(
+					"currentPlayerIndex",
+					currentPlayerIndex.toString()
+				);
+				// aktualizacja nazwy gracza na stronie
+				updatePlayerName(currentPlayerIndex);
+				updatePlayerScores();
+				// ponowne wykonanie animacji
+				animate();
+			} else {
+				// komunikat o braku punktów
+				const popupMessage = document.querySelector(".pop-up");
+				popupMessage.style.display = "block";
+				setTimeout(() => {
+					popupMessage.style.display = "none";
+				}, 2000);
+			}
+		}
+	});
+}
+
+// przycisk rozpoczęcia gry
+if (startButton) {
+	startButton.addEventListener("click", startGame);
+}
+
 // operacje wykonywane przy załadowaniu strony
 document.addEventListener("DOMContentLoaded", function () {
 	initializeSlider();
 
-	// dodawanie animacji po załadowaniu strony
-	const elementsToAnimate = document.querySelectorAll(".animate-on-load");
-	elementsToAnimate.forEach((element) => {
-		element.classList.add("scale-up-center");
-	});
+	// ładowanie animacji po załadowaniu strony
+	animate();
 
 	// aktualizacja nazwy gracza na podstawie indeksu
 	const currentPlayerIndex =
 		parseInt(sessionStorage.getItem("currentPlayerIndex")) || 0;
 	updatePlayerName(currentPlayerIndex);
+
+	//aktualizacja wyników graczy
+	updatePlayerScores();
 
 	// wyświetlenie pytań i wyzwań
 	if (window.location.pathname === "/truth.html") {
@@ -366,7 +383,4 @@ document.addEventListener("DOMContentLoaded", function () {
 		// dodanie punktów do konta gracza
 		addPoints(getCurrentPlayer(), points);
 	}
-
-	//aktualizacja wyników graczy
-	updatePlayerScores();
 });
